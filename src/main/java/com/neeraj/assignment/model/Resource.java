@@ -5,17 +5,18 @@ import javax.persistence.*;
 @Entity
 public class Resource {
 
+    public Resource() {
+    }
+
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name="resourceid")
     private int resourceId;
 
+    @Column(name="resourcename")
     private String resourceName;
 
-    @Column(name = "available_count")
-    private int availableCount;
-
     public Resource(int resourceId) {
-        super();
         this.resourceId = resourceId;
     }
     public Resource(int resourceId, String resourceName) {

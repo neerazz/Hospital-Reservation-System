@@ -1,11 +1,12 @@
 package com.neeraj.assignment.controller;
 
-import com.neeraj.assignment.Service;
+import com.neeraj.assignment.service.Service;
 import com.neeraj.assignment.model.Booking;
 import com.neeraj.assignment.model.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -18,13 +19,13 @@ public class Controller {
     //    Fetch all available resources
     @GetMapping("/resources")
     public List<Resource> getresources() {
-        return service.getresources();
+        return service.getResources();
     }
 
     //    Fetch only a specific resource
     @GetMapping("/resources/{id}")
     public Resource getresource(Integer id) {
-        return service.getresources(id);
+        return service.getResources(id);
     }
 
     //    Add/Update a new resource
@@ -42,12 +43,14 @@ public class Controller {
     //Fetch all the reservations
     @GetMapping("/reservations")
     public List<Booking> getreservations() {
-        return service.getreservations();
+        return service.getReservations();
     }
 
     //Add a new reservation
     @PostMapping("/reservations")
-    public void addreservations(@RequestParam Booking booking) {
-        service.addReservation(booking);
+    public void addReservations(@RequestParam("resourceid") int resourceid,
+                                @RequestParam("bookingDate")java.sql.Date bookingDate,
+                                @RequestParam("bookingslot") String bookingslot) {
+        service.addReservation(resourceid,bookingDate,bookingslot);
     }
 }

@@ -1,15 +1,14 @@
 create table resource
 (
-   resourceId IDENTITY not null,
-   name varchar(255) not null,
-   available_count integer,
-   primary key(resourceId)
+   resourceid IDENTITY not null,
+   resourcename varchar(255) not null,
+   primary key(resourceid)
 );
 
-create table Booking
+create table booking
 (
-   bookingId IDENTITY primary key,
-   bookingDate date not null ,
-   bookingSlot varchar(255),
+   bookingid IDENTITY primary key,
+   bookingdate date not null ,
+   bookingslot varchar(255),
    resourceid integer not null
 );

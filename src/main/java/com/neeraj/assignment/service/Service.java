@@ -1,4 +1,4 @@
-package com.neeraj.assignment;
+package com.neeraj.assignment.service;
 
 import com.neeraj.assignment.exceptions.ResourceNotFoundException;
 import com.neeraj.assignment.model.Booking;
@@ -7,6 +7,7 @@ import com.neeraj.assignment.repository.BookingRepository;
 import com.neeraj.assignment.repository.ResourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,13 +21,13 @@ public class Service {
     @Autowired
     private BookingRepository bookingRepository;
 
-    public List<Resource> getresources() {
+    public List<Resource> getResources() {
         List<Resource> allResources = new ArrayList<>();
         resourceRepository.findAll().forEach(r -> allResources.add(r));
         return allResources;
     }
 
-    public Resource getresources(Integer id) {
+    public Resource getResources(Integer id) {
         Optional<Resource> tempResource = resourceRepository.findById(id);
         return tempResource.orElseThrow(() -> new ResourceNotFoundException("There are no any resources with id:" + id));
     }
@@ -39,13 +40,21 @@ public class Service {
         resourceRepository.delete(resource);
     }
 
-    public List<Booking> getreservations() {
-        List<Booking> allreservations = new ArrayList<>();
-        bookingRepository.findAll().forEach(b -> allreservations.add(b));
-        return allreservations;
+    public List<Booking> getReservations() {
+        List<Booking> allReservations = new ArrayList<>();
+        bookingRepository.findAll().forEach(b -> allReservations.add(b));
+        return allReservations;
     }
 
-    public void addReservation(Booking booking) {
-        bookingRepository.save(booking);
+    public void addReservation(int resourceid, Date bookingDate, String bookingslot) {
+
+        if (getResources(resourceid) != null && bookingRepository.findbAvailability(resourceid,bookingDate,bookingslot) > 0) {
+            bookingRepository.save(
+                    new Booking()
+                    .setBookingDate(bookingDate)
+                    .setBookingSlot(bookingslot)
+                    .setResource(resourceid)
+            );
+        }
     }
 }
