@@ -15,14 +15,14 @@ public class Booking {
     private int bookingId;
 
     @Column(nullable=false, name = "bookingdate")
-    private Date bookingDate;
+    private Date bookingdate;
 
     @Column(name = "bookingslot")
-    private String bookingSlot;
+    private String bookingslot;
 
     @ManyToOne
     @JoinColumn(name = "resourceid" , referencedColumnName = "resourceid")
-    private int resourceid;
+    private Resource resource;
 
     public int getBookingId() {
         return bookingId;
@@ -32,28 +32,28 @@ public class Booking {
         return this;
     }
     public String getBookingSlot() {
-        return bookingSlot;
+        return bookingslot;
     }
     public Booking setBookingSlot(String bookingSlot) {
-        this.bookingSlot = bookingSlot;
+        this.bookingslot = bookingSlot;
         return this;
     }
-    public int getResourceId() {
-        return resourceid;
+    public Resource getResource() {
+        return resource;
     }
-    public Booking setResource(int resourceid) {
-        this.resourceid = resourceid;
+    public Booking setResource(Resource resource) {
+        this.resource = resource;
         return this;
     }
     public Date getBookingDate() {
-        return (Date) bookingDate.clone();
+        return (Date) bookingdate.clone();
     }
     public Booking setBookingDate(Date bookingDate) {
-        this.bookingDate = bookingDate!=null?(Date) bookingDate.clone():null;
+        this.bookingdate = bookingDate!=null?(Date) bookingDate.clone():null;
         return this;
     }
     @Override
     public String toString() {
-        return "Booking [bookingId=" + bookingId + ", bookingSlot=" + bookingSlot + ", resource=" + resourceid + "]";
+        return "Booking [bookingId=" + bookingId + ", bookingSlot=" + bookingslot + ", resource=" + resource + "]";
     }
 }

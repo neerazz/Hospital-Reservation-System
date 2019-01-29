@@ -9,7 +9,6 @@ public class Resource {
     }
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="resourceid")
     private int resourceId;
 

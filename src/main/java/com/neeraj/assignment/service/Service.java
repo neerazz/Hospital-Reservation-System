@@ -1,5 +1,6 @@
 package com.neeraj.assignment.service;
 
+import com.neeraj.assignment.data.BookingDTO;
 import com.neeraj.assignment.exceptions.ResourceNotFoundException;
 import com.neeraj.assignment.model.Booking;
 import com.neeraj.assignment.model.Resource;
@@ -46,15 +47,19 @@ public class Service {
         return allReservations;
     }
 
-    public void addReservation(int resourceid, Date bookingDate, String bookingslot) {
+    public void addReservation(BookingDTO bookingDTO) {
 
-        if (getResources(resourceid) != null && bookingRepository.findbAvailability(resourceid,bookingDate,bookingslot) > 0) {
+        if ( getResources(bookingDTO.getResourceId()) != null &&
+                bookingRepository.findAlreadyBooked(getResources(bookingDTO.getResourceId()),bookingDTO.getBookingDate(),bookingDTO.getBookingSlot()) > 0) {
             bookingRepository.save(
                     new Booking()
                     .setBookingDate(bookingDate)
                     .setBookingSlot(bookingslot)
-                    .setResource(resourceid)
+                    .setResource(getResources(resourceid))
             );
         }
+    }
+    public boolean resourceIsAvailable(int resourceid){
+        return resourceRepository.findById(resourceid)
     }
 }

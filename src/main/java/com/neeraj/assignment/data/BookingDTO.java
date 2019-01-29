@@ -1,5 +1,7 @@
 package com.neeraj.assignment.data;
 
+import java.sql.Date;
+
 public class BookingDTO {
     private String bookingSlot;
     private String bookingDate;
@@ -11,8 +13,9 @@ public class BookingDTO {
     public void setBookingSlot(String bookingSlot) {
         this.bookingSlot = bookingSlot;
     }
-    public String getBookingDate() {
-        return bookingDate;
+
+    public Date getBookingDate() {
+        return Date.valueOf(bookingDate);
     }
     public void setBookingDate(String bookingDate) {
         this.bookingDate = bookingDate;

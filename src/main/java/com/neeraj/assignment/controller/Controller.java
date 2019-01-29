@@ -1,12 +1,12 @@
 package com.neeraj.assignment.controller;
 
-import com.neeraj.assignment.service.Service;
+import com.neeraj.assignment.data.BookingDTO;
 import com.neeraj.assignment.model.Booking;
 import com.neeraj.assignment.model.Resource;
+import com.neeraj.assignment.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -30,7 +30,7 @@ public class Controller {
 
     //    Add/Update a new resource
     @PostMapping("/resources")
-    public void addResource(@RequestParam Resource resource) {
+    public void addResource(@RequestBody Resource resource) {
         service.addResource(resource);
     }
 
@@ -48,9 +48,7 @@ public class Controller {
 
     //Add a new reservation
     @PostMapping("/reservations")
-    public void addReservations(@RequestParam("resourceid") int resourceid,
-                                @RequestParam("bookingDate")java.sql.Date bookingDate,
-                                @RequestParam("bookingslot") String bookingslot) {
-        service.addReservation(resourceid,bookingDate,bookingslot);
+    public void addReservations(@RequestAttribute BookingDTO bookingDTO) {
+        service.addReservation(bookingDTO);
     }
 }
