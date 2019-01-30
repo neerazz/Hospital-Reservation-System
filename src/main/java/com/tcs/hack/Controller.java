@@ -1,17 +1,24 @@
-package com.neeraj.assignment.controller;
+package com.tcs.hack;
 
-import com.neeraj.assignment.data.BookingDTO;
-import com.neeraj.assignment.model.Booking;
-import com.neeraj.assignment.model.Resource;
-import com.neeraj.assignment.service.Service;
+import com.tcs.hack.dto.BookingDTO;
+import com.tcs.hack.dto.ReservationsDTO;
+import com.tcs.hack.model.Resource;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
 @RequestMapping("/tcs/hack/v1")
 public class Controller {
+
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
 
     @Autowired
     private Service service;
@@ -42,13 +49,13 @@ public class Controller {
 
     //Fetch all the reservations
     @GetMapping("/reservations")
-    public List<Booking> getreservations() {
+    public List<ReservationsDTO> getreservations() {
         return service.getReservations();
     }
 
     //Add a new reservation
     @PostMapping("/reservations")
-    public void addReservations(@RequestAttribute BookingDTO bookingDTO) {
+    public void addReservations(@RequestParam BookingDTO bookingDTO) throws ParseException {
         service.addReservation(bookingDTO);
     }
 }

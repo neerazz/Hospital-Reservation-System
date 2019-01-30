@@ -1,21 +1,20 @@
-package com.neeraj.assignment.model;
+package com.tcs.hack.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
-public class Resource {
+public class Resource{
+
+    @Id
+    private Integer resourceId;
+    private String resourceName;
 
     public Resource() {
     }
 
-    @Id
-    @Column(name="resourceid")
-    private int resourceId;
-
-    @Column(name="resourcename")
-    private String resourceName;
-
     public Resource(int resourceId) {
+        super();
         this.resourceId = resourceId;
     }
     public Resource(int resourceId, String resourceName) {
@@ -37,4 +36,11 @@ public class Resource {
         this.resourceName = resourceName;
     }
 
+    @Override
+    public String toString() {
+        return "Resource{" +
+                "resourceId=" + resourceId +
+                ", resourceName='" + resourceName + '\'' +
+                '}';
+    }
 }

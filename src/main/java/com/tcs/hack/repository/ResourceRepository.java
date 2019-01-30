@@ -1,7 +1,10 @@
-package com.neeraj.assignment.repository;
+package com.tcs.hack.repository;
 
-import com.neeraj.assignment.model.Resource;
+import com.tcs.hack.model.Resource;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ResourceRepository extends CrudRepository<Resource, Integer> {
+
 }
